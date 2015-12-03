@@ -3,7 +3,7 @@ package org.testing.toolbox;
 /**
  * Abstract integration test case.
  * 
- * @author Idriss Neumann <idriss.neumann@capgemini.com>
+ * @author Idriss Neumann <neumann.idriss@gmail.com>
  *
  */
 public class IntegrationTest extends AbstractTest {

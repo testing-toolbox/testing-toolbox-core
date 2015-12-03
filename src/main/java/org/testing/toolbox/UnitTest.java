@@ -3,7 +3,7 @@ package org.testing.toolbox;
 /**
  * Abstract unit test case.
  * 
- * @author Idriss Neumann <idriss.neumann@capgemini.com>
+ * @author Idriss Neumann <neumann.idriss@gmail.com>
  *
  */
 public class UnitTest extends AbstractTest {
