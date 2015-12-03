@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.inject.Inject;
 import javax.sql.DataSource;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -45,7 +46,6 @@ import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.ext.postgresql.PostgresqlDataTypeFactory;
 import org.dbunit.operation.DatabaseOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
@@ -60,7 +60,7 @@ public abstract class DatabaseTest extends IntegrationTest {
 	protected final String PURGE_DS = getTestCommonDataDir() + "schema_purge_ds.xml";
 	protected final String SCHEMA = "public";
 
-	@Autowired
+	@Inject
 	private DataSource dataSource;
 
 	/**

@@ -6,7 +6,7 @@
 	<artifactId>testing-toolbox-core</artifactId>
 	<name>testing-toolbox-core</name>
 	<description>Units and integration tests libs</description>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<packaging>jar</packaging>
 	
 	<properties>
@@ -22,8 +22,8 @@
 		<commons-lang.version>3.4</commons-lang.version>
 		<commons-io.version>2.4</commons-io.version>
 		
-		<!-- spring -->
-		<spring.version>4.1.3.RELEASE</spring.version>
+		<!-- CDI -->
+		<cdi-api.version>1.2</cdi-api.version>
 		
 		<!-- Slf4j -->
 		<slf4j.version>1.7.13</slf4j.version>
@@ -78,10 +78,10 @@
         </dependency>
         
         <dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <version>${cdi-api.version}</version>
+        </dependency>
 	</dependencies>
 	
 	<distributionManagement>
