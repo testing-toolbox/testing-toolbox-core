@@ -59,6 +59,7 @@ public abstract class DatabaseTest extends IntegrationTest {
 	protected static final DatabaseOperation DEFAULT_OPERATION = DatabaseOperation.INSERT;
 	protected final String PURGE_DS = getTestCommonDataDir() + "schema_purge_ds.xml";
 	protected final String SCHEMA = "public";
+	protected Boolean disableDeleteTmpDataSet = false;
 
 	@Inject
 	private DataSource dataSource;
@@ -438,7 +439,9 @@ public abstract class DatabaseTest extends IntegrationTest {
 			assertEquals("Problème avec le nombre d'occurrence de " + line.buildXpath(), nbOccurence, getNbOccurrenceFromXpath(nameOfXML, line.buildXpath()));
 		}
 
-		deleteFileQuietly(getAbsolutePath(getTestDataDir() + nameOfXML));
+		if (null == disableDeleteTmpDataSet || !disableDeleteTmpDataSet) {
+			deleteFileQuietly(getAbsolutePath(getTestDataDir() + nameOfXML));
+		}
 	}
 
 	/**
@@ -523,5 +526,20 @@ public abstract class DatabaseTest extends IntegrationTest {
 		lstLines.add(lineExpected);
 
 		assertNotContainDataSet(schema, tables, lstLines);
+	}
+
+	/**
+	 * @return the disableDeleteTmpDataSet
+	 */
+	public Boolean getDisableDeleteTmpDataSet() {
+		return disableDeleteTmpDataSet;
+	}
+
+	/**
+	 * @param disableDeleteTmpDataSet
+	 *            the disableDeleteTmpDataSet to set
+	 */
+	public void setDisableDeleteTmpDataSet(Boolean disableDeleteTmpDataSet) {
+		this.disableDeleteTmpDataSet = disableDeleteTmpDataSet;
 	}
 }
