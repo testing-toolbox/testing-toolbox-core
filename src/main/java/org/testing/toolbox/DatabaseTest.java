@@ -160,21 +160,23 @@ public abstract class DatabaseTest extends IntegrationTest {
 	 * Launching replacement dataset.
 	 * 
 	 * @param dataSet
-	 * @param param
+	 * @param eplacements
 	 * @param schema
 	 * @param operation
 	 */
-	private void execReplacementDataSet(IDataSet dataSet, Map<String, String> param, String schema, DatabaseOperation operation) {
+	private void execReplacementDataSet(IDataSet dataSet, Replacements replacements, String schema,
+			DatabaseOperation operation) {
 		try {
 			ReplacementDataSet replacementDataSet = new ReplacementDataSet(dataSet);
 
-			Set<String> keys = param.keySet();
+			Map<String, String> replacementsMap = replacements.toMap();
+			Set<String> keys = replacementsMap.keySet();
 			Iterator<String> it = keys.iterator();
 
 			String key;
 			while (it.hasNext()) {
 				key = it.next();
-				replacementDataSet.addReplacementObject(key, param.get(key));
+				replacementDataSet.addReplacementObject(key, replacementsMap.get(key));
 			}
 
 			replacementDataSet.addReplacementObject("${NULL}", null);
@@ -240,24 +242,25 @@ public abstract class DatabaseTest extends IntegrationTest {
 	 * Launching replacement dataset from XML string.
 	 * 
 	 * @param strXML
-	 * @param param
+	 * @param replacements
 	 * @param schema
 	 */
-	public void execReplacementDataSetFromString(String strXML, Map<String, String> param, String schema) {
-		execReplacementDataSetFromString(strXML, param, schema, DEFAULT_OPERATION);
+	public void execReplacementDataSetFromString(String strXML, Replacements replacements, String schema) {
+		execReplacementDataSetFromString(strXML, replacements, schema, DEFAULT_OPERATION);
 	}
 
 	/**
 	 * Launching replacement dataset from XML string.
 	 * 
 	 * @param strXML
-	 * @param param
+	 * @param replacements
 	 * @param schema
 	 * @param operation
 	 */
-	public void execReplacementDataSetFromString(String strXML, Map<String, String> param, String schema, DatabaseOperation operation) {
+	public void execReplacementDataSetFromString(String strXML, Replacements replacements, String schema,
+			DatabaseOperation operation) {
 		try {
-			execReplacementDataSet(getDataSetFromString(strXML), param, schema, operation);
+			execReplacementDataSet(getDataSetFromString(strXML), replacements, schema, operation);
 		} catch (DataSetException ex) {
 			failWithException(ex);
 		}
@@ -267,24 +270,25 @@ public abstract class DatabaseTest extends IntegrationTest {
 	 * Launching replacement dataset from XML file.
 	 * 
 	 * @param pathXMLFile
-	 * @param param
+	 * @param replacements
 	 * @param schema
 	 */
-	public void execReplacementDataSetFromFile(String pathXMLFile, Map<String, String> param, String schema) {
-		execReplacementDataSetFromFile(pathXMLFile, param, schema, DEFAULT_OPERATION);
+	public void execReplacementDataSetFromFile(String pathXMLFile, Replacements replacements, String schema) {
+		execReplacementDataSetFromFile(pathXMLFile, replacements, schema, DEFAULT_OPERATION);
 	}
 
 	/**
 	 * Launching replacement dataset from XML file.
 	 * 
 	 * @param pathXMLFile
-	 * @param param
+	 * @param replacements
 	 * @param schema
 	 * @param operation
 	 */
-	public void execReplacementDataSetFromFile(String pathXMLFile, Map<String, String> param, String schema, DatabaseOperation operation) {
+	public void execReplacementDataSetFromFile(String pathXMLFile, Replacements replacements, String schema,
+			DatabaseOperation operation) {
 		try {
-			execReplacementDataSet(getDataSet(pathXMLFile), param, schema, operation);
+			execReplacementDataSet(getDataSet(pathXMLFile), replacements, schema, operation);
 		} catch (DataSetException | IOException e) {
 			failWithException(e);
 		}
@@ -369,7 +373,8 @@ public abstract class DatabaseTest extends IntegrationTest {
 	 * @param schema
 	 * @return IDataSet
 	 */
-	public IDataSet generateDataSet(Map<String, String> queryByTables, String nameOfXml, String nameOfDtd, String schema) {
+	public IDataSet generateDataSet(Map<String, String> queryByTables, String nameOfXml, String nameOfDtd,
+			String schema) {
 		IDataSet dataSet = generateDataSet(queryByTables, nameOfXml, schema);
 
 		try {
@@ -432,11 +437,13 @@ public abstract class DatabaseTest extends IntegrationTest {
 	 * @param Integer
 	 *            nbOccurence
 	 */
-	public void assertOccrurrenceDataSet(String schema, List<String> tables, List<ExpectedLineDataSet> lstLinesExpected, Integer nbOccurence) {
+	public void assertOccrurrenceDataSet(String schema, List<String> tables, List<ExpectedLineDataSet> lstLinesExpected,
+			Integer nbOccurence) {
 		String nameOfXML = getNameTmpDataSet(tables);
 		getDataSetFromTables(tables, nameOfXML, schema);
 		for (ExpectedLineDataSet line : lstLinesExpected) {
-			assertEquals("Problème avec le nombre d'occurrence de " + line.buildXpath(), nbOccurence, getNbOccurrenceFromXpath(nameOfXML, line.buildXpath()));
+			assertEquals("Problème avec le nombre d'occurrence de " + line.buildXpath(), nbOccurence,
+					getNbOccurrenceFromXpath(nameOfXML, line.buildXpath()));
 		}
 
 		if (null == disableDeleteTmpDataSet || !disableDeleteTmpDataSet) {
@@ -493,7 +500,8 @@ public abstract class DatabaseTest extends IntegrationTest {
 	 * @param tables
 	 * @param lstLinesExpected
 	 */
-	public void assertNotContainDataSet(String schema, List<String> tables, List<ExpectedLineDataSet> lstLinesExpected) {
+	public void assertNotContainDataSet(String schema, List<String> tables,
+			List<ExpectedLineDataSet> lstLinesExpected) {
 		assertOccrurrenceDataSet(schema, tables, lstLinesExpected, 0);
 	}
 
