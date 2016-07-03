@@ -21,13 +21,23 @@ public class ExpectedLineDataSet {
 	private Map<String, String> attributes;
 
 	/**
-	 * Constructor.
+	 * Private constructor, you must use newInstance method.
 	 * 
 	 * @param tableName
 	 */
-	public ExpectedLineDataSet(String tableName) {
+	private ExpectedLineDataSet(String tableName) {
 		this.tableName = tableName;
 		attributes = new HashMap<String, String>();
+	}
+
+	/**
+	 * New instance of ExpectedLineDataSet.
+	 * 
+	 * @param tableName
+	 * @return ExpectedLineDataSet
+	 */
+	public static ExpectedLineDataSet newInstance(String tableName) {
+		return new ExpectedLineDataSet(tableName);
 	}
 
 	/**
@@ -35,9 +45,11 @@ public class ExpectedLineDataSet {
 	 * 
 	 * @param name
 	 * @param value
+	 * @return this instance (fluent coding style)
 	 */
-	public void addAttribute(String name, String value) {
+	public ExpectedLineDataSet add(String name, String value) {
 		attributes.put(name, value);
+		return this;
 	}
 
 	/**
