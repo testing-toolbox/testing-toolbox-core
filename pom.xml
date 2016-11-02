@@ -6,7 +6,7 @@
 	<artifactId>testing-toolbox-core</artifactId>
 	<name>testing-toolbox-core</name>
 	<description>Units and integration tests libs</description>
-	<version>1.0.4</version>
+	<version>1.0.5</version>
 	<packaging>jar</packaging>
 	
 	<properties>
@@ -29,7 +29,7 @@
 		<slf4j.version>1.7.13</slf4j.version>
 		
 		<!-- Maven plugins -->
-		<jacoco-maven-plugin.version>0.7.4.201502262128</jacoco-maven-plugin.version>
+		<jacoco-maven-plugin.version>0.7.7.201606060606</jacoco-maven-plugin.version>
 		<maven-idea-plugin.version>2.2</maven-idea-plugin.version>
 		<maven-assembly-plugin.version>2.3</maven-assembly-plugin.version>
 		<maven-surefire-plugin.version>2.16</maven-surefire-plugin.version>
