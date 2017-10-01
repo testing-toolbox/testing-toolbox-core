@@ -41,6 +41,7 @@ import org.dbunit.dataset.DataSetException;
 import org.dbunit.dataset.FilteredDataSet;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.ReplacementDataSet;
+import org.dbunit.dataset.datatype.DefaultDataTypeFactory;
 import org.dbunit.dataset.xml.FlatDtdWriter;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
@@ -61,6 +62,9 @@ public abstract class DatabaseTest extends IntegrationTest {
 	protected final String SCHEMA = "public";
 	protected Boolean disableDeleteTmpDataSet = false;
 
+	// Setted by default as PostgresqlDataTypeFactory but you can change it in your tests classes.
+	protected DefaultDataTypeFactory dataTypeFactory = new PostgresqlDataTypeFactory();
+
 	@Inject
 	private DataSource dataSource;
 
@@ -76,7 +80,7 @@ public abstract class DatabaseTest extends IntegrationTest {
 		IDatabaseConnection connection = new DatabaseConnection(con, strSchema);
 		DatabaseConfig config = connection.getConfig();
 		config.setProperty(DatabaseConfig.FEATURE_QUALIFIED_TABLE_NAMES, true);
-		config.setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new PostgresqlDataTypeFactory());
+		config.setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, dataTypeFactory);
 		return connection;
 	}
 
@@ -549,5 +553,13 @@ public abstract class DatabaseTest extends IntegrationTest {
 	 */
 	public void setDisableDeleteTmpDataSet(Boolean disableDeleteTmpDataSet) {
 		this.disableDeleteTmpDataSet = disableDeleteTmpDataSet;
+	}
+
+	public DefaultDataTypeFactory getDataTypeFactory() {
+		return dataTypeFactory;
+	}
+
+	public void setDataTypeFactory(DefaultDataTypeFactory dataTypeFactory) {
+		this.dataTypeFactory = dataTypeFactory;
 	}
 }

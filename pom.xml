@@ -6,7 +6,7 @@
 	<artifactId>testing-toolbox-core</artifactId>
 	<name>testing-toolbox-core</name>
 	<description>Units and integration tests libs</description>
-	<version>1.0.5</version>
+	<version>1.0.6</version>
 	<packaging>jar</packaging>
 	
 	<properties>
