@@ -141,6 +141,10 @@
 
 					<!-- github username -->
 					<repositoryOwner>testing-toolbox</repositoryOwner>
+
+					<userName>${github.username}</userName>
+
+					<password>${github.password}</password>
 				</configuration>
 				<executions>
 					<!-- run site-maven-plugin's 'site' target as part of the build's normal 
