@@ -6,7 +6,7 @@
 	<artifactId>testing-toolbox-core</artifactId>
 	<name>testing-toolbox-core</name>
 	<description>Units and integration tests libs</description>
-	<version>1.0.6</version>
+	<version>1.0.7</version>
 	<packaging>jar</packaging>
 	
 	<properties>
@@ -37,7 +37,6 @@
 		<maven-compiler-plugin.version>2.5.1</maven-compiler-plugin.version>
 		<site-maven-plugin.version>0.12</site-maven-plugin.version>
 		<maven-deploy-plugin.version>2.8.1</maven-deploy-plugin.version>
-		<findbugs-maven-plugin.version>3.0.1</findbugs-maven-plugin.version>
 		<maven-checkstyle-plugin.version>2.13</maven-checkstyle-plugin.version>
 		
 		<!-- github server corresponds to entry in ~/.m2/settings.xml -->
@@ -142,6 +141,10 @@
 
 					<!-- github username -->
 					<repositoryOwner>testing-toolbox</repositoryOwner>
+
+					<userName>${github.username}</userName>
+
+					<password>${github.password}</password>
 				</configuration>
 				<executions>
 					<!-- run site-maven-plugin's 'site' target as part of the build's normal 
@@ -253,27 +256,6 @@
 						<configuration>
 							<dataFile>${basedir}/target/jacoco.exec</dataFile>
 						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>findbugs-maven-plugin</artifactId>
-				<version>${findbugs-maven-plugin.version}</version>
-				<configuration>
-					<effort>Max</effort>
-					<threshold>Low</threshold>
-					<includeFilterFile>${basedir}/FindBugs.xml</includeFilterFile>
-					<xmlOutput>true</xmlOutput>
-					<failOnError>false</failOnError>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>pre-integration-test</phase>
-						<goals>
-							<goal>findbugs</goal>
-						</goals>
 					</execution>
 				</executions>
 			</plugin>
