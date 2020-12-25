@@ -2,6 +2,11 @@
 
 A testing toolbox for Spring or CDI or `javax.inject` application using a JDBC compliant database.
 
-See the wiki to get more information : https://github.com/testing-toolbox/testing-toolbox-core/wiki
+## Git repo
 
-CI/CD : https://github.com/testing-toolbox/testing-toolbox-core/actions
+* Main repo: https://gitlab.comwork.io/oss/testing-toolbox-core
+* Github mirror and mvn repo: https://github.com/testing-toolbox/testing-toolbox-core
+
+## Documentation
+
+* [Getting started](./docs/getting-started.md)
