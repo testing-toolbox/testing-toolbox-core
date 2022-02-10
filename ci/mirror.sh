@@ -1,9 +1,9 @@
 #!/bin/bash
 
-REPO_PATH="/home/centos/testing-toolbox-core/"
+REPO_PATH="${PROJECT_HOME}/testing-toolbox-core/"
 
 cd "${REPO_PATH}" && git pull origin master || :
 git push github master 
 git push pgitlab master
-exit 
-0
+git push bitbucket master
+exit 0
